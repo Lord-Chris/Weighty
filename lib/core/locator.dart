@@ -6,5 +6,6 @@ GetIt locator = GetIt.instance;
 Future<void> setUpLocator() async {
   locator.registerLazySingleton<INavigationService>(() => NavigationService());
   locator.registerLazySingleton<IFirestoreService>(() => FirestoreService());
-  locator.registerLazySingleton<IAuthenticationService>(() => AuthenticationService());
+  locator.registerLazySingleton<IAuthenticationService>(
+      () => AuthenticationService());
 }

@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'i_authentication_service.dart';
 
-class AuthenticationService implements IAuthenticationService{
+class AuthenticationService implements IAuthenticationService {
   final _auth = FirebaseAuth.instance;
 
   @override
