@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:weighty/core/models/weight_input_model.dart';
 import 'package:weighty/ui/constants/_constants.dart';
-import 'package:weighty/ui/shared/_shared.dart';
 import 'package:weighty/ui/views/home_view/weight_input_sheet.dart';
 
 import 'home_viewmodel.dart';

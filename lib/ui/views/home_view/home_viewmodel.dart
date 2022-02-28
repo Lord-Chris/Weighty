@@ -5,7 +5,7 @@ import 'package:stacked/stacked.dart';
 import 'package:weighty/core/_core.dart';
 import 'package:weighty/services/_services.dart';
 
-class HomeViewmodel extends StreamViewModel {
+class HomeViewmodel extends StreamViewModel with ToastMixin {
   final _firestoreService = locator<IFirestoreService>();
   final _authService = locator<IAuthenticationService>();
   final _navService = locator<INavigationService>();
@@ -20,8 +20,10 @@ class HomeViewmodel extends StreamViewModel {
       await _firestoreService.addWeight(data);
       setBusy(false);
       _navService.back();
-    } on FirebaseException catch (e) {
+      showSuccessToast("Weight Added Successfully");
+    } on FirebaseException {
       setBusy(false);
+      showFailureToast("Something went wrong.");
     }
   }
 
@@ -31,16 +33,19 @@ class HomeViewmodel extends StreamViewModel {
       await _firestoreService.updateWeight(input);
       setBusy(false);
       _navService.back();
+      showSuccessToast("Weight Updated Successfully");
     } on FirebaseException {
       setBusy(false);
+      showFailureToast("Something went wrong.");
     }
   }
 
   Future<void> deleteWeight(WeightInput input) async {
     try {
       await _firestoreService.deleteWeight(input);
-    } on FirebaseException catch (e) {
-      setBusy(false);
+      showSuccessToast("Weight Deleted!");
+    } on FirebaseException {
+      showFailureToast("Something went wrong.");
     }
   }
 

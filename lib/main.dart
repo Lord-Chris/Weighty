@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:weighty/core/locator.dart';
-import 'package:weighty/core/routes.dart';
+import 'package:weighty/core/_core.dart';
 import 'package:weighty/services/_services.dart';
 import 'package:weighty/ui/constants/colors.dart';
 import 'package:weighty/ui/views/splash_view/splash_view.dart';
@@ -21,6 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Weighty',
+      scaffoldMessengerKey: ToastMixin.scaffoldkey,
       navigatorKey: NavigationService.navigatorKey,
       onGenerateRoute: Routes.generateRoute,
       theme: ThemeData(
