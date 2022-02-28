@@ -1,16 +1,14 @@
-# weighty
+# Weighty
+An app that tracks weight of anonmously signed in users
 
-A new Flutter project.
+## Project Information
+- State Management: Stacked(It is a state management based off Provider.)
+- Dependency Injector: get_it
+- Architecture: MVVM (Model, View, Viewmodel)
 
-## Getting Started
+- Dart version: 2.16.1
+- Flutter version: 2.10.2
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Project reasons
+- Dependency Injector: 'get_it' is used because of its ability to invert control. Which is to pass up persisisting instances of data up the widget tree
+- Architecture: MVVM is used because of its ease of structure, scalability, clarity, etc.
