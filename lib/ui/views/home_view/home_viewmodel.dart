@@ -31,16 +31,14 @@ class HomeViewmodel extends StreamViewModel {
       await _firestoreService.updateWeight(input);
       setBusy(false);
       _navService.back();
-    } on FirebaseException catch (e) {
+    } on FirebaseException {
       setBusy(false);
     }
   }
 
   Future<void> deleteWeight(WeightInput input) async {
     try {
-      setBusy(true);
       await _firestoreService.deleteWeight(input);
-      setBusy(false);
     } on FirebaseException catch (e) {
       setBusy(false);
     }
@@ -50,7 +48,7 @@ class HomeViewmodel extends StreamViewModel {
     setBusy(true);
     await Future.delayed(const Duration(milliseconds: 500));
     await _authService.logOut();
-    _navService.offAllNamed(Routes.loginRoute, (route) => route.isFirst);
+    _navService.offNamed(Routes.loginRoute);
     setBusy(false);
   }
 

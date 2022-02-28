@@ -65,17 +65,41 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: GTWalsheimPro
+      fonts:
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-Black.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-BlackOblique.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-Bold.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-BoldOblique.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-CondensedBlack.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-CondensedBlackOblique.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-CondensedBold.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-CondensedBoldOblique.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-CondensedLight.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-CondensedLightOblique.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-CondensedMedium.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-CondensedMediumOblique.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-CondensedRegular.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-CondensedRegularOblique.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-CondensedThin.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-CondensedThinOblique.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-CondensedUltraBold.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-CondensedUltraBoldOblique.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-CondensedUltraLight.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-CondensedUltraLightOblique.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-Light.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-LightOblique.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-Medium.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-MediumOblique.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-Regular.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-RegularOblique.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-Thin.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-ThinOblique.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-UltraBold.ttf
+        - asset: fonts/GTWalsheimPro/GTWalsheimPro-UltraBoldOblique.ttf
+
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

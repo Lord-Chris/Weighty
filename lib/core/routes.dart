@@ -15,7 +15,6 @@ class Routes {
       case loginRoute:
         return MaterialPageRoute(builder: (_) => const LoginView());
       case homeRoute:
-        // var data = settings.arguments as User;
         return MaterialPageRoute(builder: (_) => const HomeView());
       default:
         return MaterialPageRoute(

@@ -6,7 +6,16 @@ const kHeaderStyle = TextStyle(
   fontSize: 50,
   color: AppColors.main,
   fontStyle: FontStyle.italic,
-  fontWeight: FontWeight.bold,
+  fontWeight: FontWeight.w900,
+  fontFamily: "GTWalsheimPro",
+);
+
+const kAppbarStyle = TextStyle(
+  fontSize: 35,
+  color: AppColors.white,
+  fontStyle: FontStyle.italic,
+  fontWeight: FontWeight.w900,
+  fontFamily: "GTWalsheimPro",
 );
 
 const kMainStyle = TextStyle(

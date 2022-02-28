@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:weighty/core/locator.dart';
 import 'package:weighty/core/routes.dart';
 import 'package:weighty/services/_services.dart';
+import 'package:weighty/ui/constants/colors.dart';
 import 'package:weighty/ui/views/splash_view/splash_view.dart';
 
 Future<void> main() async {
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
       navigatorKey: NavigationService.navigatorKey,
       onGenerateRoute: Routes.generateRoute,
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
+        primarySwatch: AppColors.main,
+        scaffoldBackgroundColor: AppColors.bgColor,
       ),
       home: const SplashView(),
     );

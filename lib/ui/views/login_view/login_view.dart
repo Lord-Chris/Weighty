@@ -15,7 +15,7 @@ class LoginView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            const YMargin(100),
+            const Spacer(),
             const Text(
               "Weighty",
               style: kHeaderStyle,
@@ -26,7 +26,7 @@ class LoginView extends StatelessWidget {
               style: kBodyStyle,
               textAlign: TextAlign.center,
             ),
-            const YMargin(200),
+            const Spacer(),
             ViewModelBuilder<LoginViewmodel>.reactive(
               builder: (__, model, child) {
                 return Center(
@@ -41,9 +41,10 @@ class LoginView extends StatelessWidget {
             ),
             const YMargin(10),
             const Text(
-              "**This will sign you in anonymous",
+              "**This will sign you in anonymously",
               style: kSubBodyStyle,
             ),
+            const YMargin(32),
           ],
         ),
       ),

@@ -7,15 +7,22 @@ import 'package:weighty/ui/views/home_view/weight_input_sheet.dart';
 
 import 'home_viewmodel.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
 
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewmodel>.reactive(
       viewModelBuilder: () => HomeViewmodel(),
       builder: (context, model, _) {
         return Scaffold(
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
           floatingActionButton: FloatingActionButton(
             onPressed: () async {
               await showDialog(
@@ -25,74 +32,66 @@ class HomeView extends StatelessWidget {
               Icons.add,
             ),
           ),
+          appBar: AppBar(
+            toolbarHeight: 70,
+            title: const Text(
+              "Weighty",
+              style: kAppbarStyle,
+            ),
+            actions: [
+              IconButton(
+                onPressed: () => model.signOutUser(),
+                icon: const Icon(
+                  Icons.logout,
+                  size: 25,
+                  color: AppColors.white,
+                ),
+              ),
+            ],
+          ),
           body: SafeArea(
-            child: SizedBox(
+            child: Container(
+              padding: const EdgeInsets.all(16),
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Column(
-                    children: [
-                      TextButton(
-                        onPressed: () => model.signOutUser(),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              "Log out",
-                              style: kMainStyle.copyWith(fontSize: 20),
-                            ),
-                            const Icon(
-                              Icons.logout,
-                              color: AppColors.black,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Text(
-                        "Weighty",
-                        style: kHeaderStyle,
-                      ),
-                      Expanded(
-                        child: StreamBuilder<List<WeightInput>>(
-                          stream: model.stream,
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            }
-                            final _info = snapshot.data!;
-                            if (!snapshot.hasData || _info.isEmpty) {
-                              return const Center(
-                                child: Text(
-                                  "No weight added yet",
-                                  style: kBodyStyle,
-                                ),
-                              );
-                            }
-                            if (snapshot.hasError) {
-                              return const Center(
-                                child: Text(
-                                  "Error Found",
-                                  style: kBodyStyle,
-                                ),
-                              );
-                            }
-                            return ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: snapshot.data?.length ?? 0,
-                              itemBuilder: (__, index) {
-                                final data = snapshot.data?[index];
-                                return WeightInfoTile(data: data);
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                    ],
+                  StreamBuilder<List<WeightInput>>(
+                    stream: model.stream,
+                    builder: (context, snapshot) {
+                      final _info = snapshot.data ?? [];
+                      if (snapshot.connectionState == ConnectionState.waiting &&
+                          _info.isEmpty) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      if (!snapshot.hasData || _info.isEmpty) {
+                        return const Center(
+                          child: Text(
+                            "No weight added yet",
+                            style: kBodyStyle,
+                          ),
+                        );
+                      }
+                      if (snapshot.hasError) {
+                        return const Center(
+                          child: Text(
+                            "Error Found",
+                            style: kBodyStyle,
+                          ),
+                        );
+                      }
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: snapshot.data?.length ?? 0,
+                        itemBuilder: (__, index) {
+                          final data = snapshot.data?[index];
+                          return WeightInfoTile(data: data);
+                        },
+                      );
+                    },
                   ),
                   Visibility(
                     visible: model.isBusy,
@@ -125,33 +124,39 @@ class WeightInfoTile extends ViewModelWidget<HomeViewmodel> {
 
   @override
   Widget build(BuildContext context, HomeViewmodel viewModel) {
-    return ListTile(
-      contentPadding: const EdgeInsets.fromLTRB(25, 0, 16, 0),
-      title: Text(
-        "You weigh: ${data?.weight}kg",
-        style: kBodyStyle.copyWith(fontWeight: FontWeight.bold),
-      ),
-      subtitle: Text(
-        "${data?.dateString}",
-        style: kSubBodyStyle,
-      ),
-      trailing: ButtonBar(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.edit),
-            onPressed: () async {
-              await showDialog(
-                context: context,
-                builder: (_) => WeightInputSheet(viewModel, weight: data),
-              );
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.delete),
-            onPressed: () => viewModel.deleteWeight(data!),
-          ),
-        ],
+    return Card(
+      child: ListTile(
+        contentPadding: const EdgeInsets.fromLTRB(25, 10, 8, 0),
+        title: Text(
+          "You weigh: ${data?.weight}kg",
+          style: kBodyStyle.copyWith(fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(
+          "${data?.dateString}",
+          style: kSubBodyStyle,
+        ),
+        trailing: ButtonBar(
+          mainAxisSize: MainAxisSize.min,
+          buttonPadding: const EdgeInsets.all(5),
+          children: [
+            IconButton(
+              icon: const Icon(Icons.edit),
+              color: AppColors.main,
+              onPressed: () async {
+                await showDialog(
+                  context: context,
+                  builder: (_) => WeightInputSheet(viewModel, weight: data),
+                );
+              },
+            ),
+            IconButton(
+              padding: const EdgeInsets.all(5),
+              icon: const Icon(Icons.delete),
+              color: AppColors.main,
+              onPressed: () => viewModel.deleteWeight(data!),
+            ),
+          ],
+        ),
       ),
     );
   }
