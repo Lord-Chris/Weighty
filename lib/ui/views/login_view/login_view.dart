@@ -22,8 +22,8 @@ class LoginView extends StatelessWidget {
             ),
             const YMargin(50),
             const Text(
-              "The number one app for tracking weight",
-              style: kMainStyle,
+              "The number one weight tracker",
+              style: kBodyStyle,
               textAlign: TextAlign.center,
             ),
             const YMargin(200),

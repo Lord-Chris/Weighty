@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 
-class NavigationService {
-  static NavigationService? _navigationService;
+import 'i_navigation_service.dart';
 
-  static NavigationService get instance {
-    _navigationService ??= NavigationService();
-    return _navigationService!;
-  }
-
+class NavigationService implements INavigationService {
   static final navigatorKey = GlobalKey<NavigatorState>();
 
+  @override
   Future<T?>? toNamed<T extends Object?>(
     String routeName, {
     Object? arguments,
@@ -20,6 +16,7 @@ class NavigationService {
     );
   }
 
+  @override
   Future<T?>? offNamed<T extends Object?, TO extends Object?>(
     String routeName, {
     TO? result,
@@ -32,6 +29,7 @@ class NavigationService {
     );
   }
 
+  @override
   Future<T?>? offAllNamed<T extends Object?>(
     String routeName,
     bool Function(Route<dynamic>) predicate, {
@@ -44,6 +42,7 @@ class NavigationService {
     );
   }
 
+  @override
   void back<T extends Object?>([T? result]) {
     return navigatorKey.currentState?.pop(result);
   }

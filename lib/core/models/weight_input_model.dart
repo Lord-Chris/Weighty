@@ -11,7 +11,8 @@ class WeightInput {
     required this.dateTime,
   });
 
-  String get dateString => DateFormat.yMMMEd().format(dateTime);
+  String get dateString =>
+      DateFormat("EEE, d MMM yyyy on h:mm a").format(dateTime);
 
   @override
   String toString() => 'WeightInput(weight: $weight, dateTime: $dateTime)';
@@ -19,7 +20,7 @@ class WeightInput {
   Map<String, dynamic> toMap() {
     return {
       'weight': weight,
-      'date_time': dateTime.millisecondsSinceEpoch,
+      'date_time': dateTime.microsecondsSinceEpoch,
     };
   }
 
@@ -32,7 +33,7 @@ class WeightInput {
   factory WeightInput.fromMap(Map<String, dynamic> map) {
     return WeightInput(
       weight: map['weight']?.toDouble() ?? 0.0,
-      dateTime: DateTime.fromMillisecondsSinceEpoch(map['date_time']),
+      dateTime: DateTime.fromMicrosecondsSinceEpoch(map['date_time']),
     );
   }
 
@@ -40,4 +41,14 @@ class WeightInput {
 
   factory WeightInput.fromJson(String source) =>
       WeightInput.fromMap(json.decode(source));
+
+  WeightInput copyWith({
+    double? weight,
+    DateTime? dateTime,
+  }) {
+    return WeightInput(
+      weight: weight ?? this.weight,
+      dateTime: dateTime ?? this.dateTime,
+    );
+  }
 }

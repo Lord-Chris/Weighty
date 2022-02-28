@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:weighty/core/models/weight_input_model.dart';
 import 'package:weighty/ui/constants/_constants.dart';
 import 'package:weighty/ui/shared/_shared.dart';
+import 'package:weighty/ui/views/home_view/weight_input_sheet.dart';
 
 import 'home_viewmodel.dart';
 
@@ -57,7 +58,14 @@ class HomeView extends StatelessWidget {
                         child: StreamBuilder<List<WeightInput>>(
                           stream: model.stream,
                           builder: (context, snapshot) {
-                            if (!snapshot.hasData) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            final _info = snapshot.data!;
+                            if (!snapshot.hasData || _info.isEmpty) {
                               return const Center(
                                 child: Text(
                                   "No weight added yet",
@@ -78,32 +86,7 @@ class HomeView extends StatelessWidget {
                               itemCount: snapshot.data?.length ?? 0,
                               itemBuilder: (__, index) {
                                 final data = snapshot.data?[index];
-                                return ListTile(
-                                  contentPadding:
-                                      const EdgeInsets.fromLTRB(25, 0, 16, 0),
-                                  title: Text(
-                                    "You weigh: ${data?.weight}kg",
-                                    style: kBodyStyle.copyWith(
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  subtitle: Text(
-                                    "${data?.dateString}",
-                                    style: kSubBodyStyle,
-                                  ),
-                                  trailing: ButtonBar(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      IconButton(
-                                        icon: const Icon(Icons.edit),
-                                        onPressed: () {},
-                                      ),
-                                      IconButton(
-                                        icon: const Icon(Icons.delete),
-                                        onPressed: () {},
-                                      ),
-                                    ],
-                                  ),
-                                );
+                                return WeightInfoTile(data: data);
                               },
                             );
                           },
@@ -132,54 +115,43 @@ class HomeView extends StatelessWidget {
   }
 }
 
-final _formKey = GlobalKey<FormState>();
+class WeightInfoTile extends ViewModelWidget<HomeViewmodel> {
+  const WeightInfoTile({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
 
-class WeightInputSheet extends StatelessWidget {
-  WeightInputSheet(this.model, {Key? key}) : super(key: key);
-  final HomeViewmodel model;
-  final _controller = TextEditingController();
+  final WeightInput? data;
 
   @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(45),
-        ),
-        padding: const EdgeInsets.all(20),
-        // clipBehavior: Clip.hardEdge,
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const YMargin(20),
-              const Text(
-                "Weighty",
-                style: kHeaderStyle,
-              ),
-              const YMargin(20),
-              AppTextField(
-                controller: _controller,
-                validator: (val) => val == null || val.isEmpty
-                    ? "Field must not be empty"
-                    : null,
-                hint: "XXX",
-                label: "Weight",
-              ),
-              const YMargin(20),
-              AppButton(
-                label: "ADD WEIGHT",
-                onTap: () {
-                  if (!_formKey.currentState!.validate()) return;
-                  model.addWeight(_controller.text);
-                },
-              ),
-            ],
+  Widget build(BuildContext context, HomeViewmodel viewModel) {
+    return ListTile(
+      contentPadding: const EdgeInsets.fromLTRB(25, 0, 16, 0),
+      title: Text(
+        "You weigh: ${data?.weight}kg",
+        style: kBodyStyle.copyWith(fontWeight: FontWeight.bold),
+      ),
+      subtitle: Text(
+        "${data?.dateString}",
+        style: kSubBodyStyle,
+      ),
+      trailing: ButtonBar(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(
+            icon: const Icon(Icons.edit),
+            onPressed: () async {
+              await showDialog(
+                context: context,
+                builder: (_) => WeightInputSheet(viewModel, weight: data),
+              );
+            },
           ),
-        ),
+          IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed: () => viewModel.deleteWeight(data!),
+          ),
+        ],
       ),
     );
   }

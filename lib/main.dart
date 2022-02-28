@@ -1,12 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:weighty/core/locator.dart';
 import 'package:weighty/core/routes.dart';
-import 'package:weighty/services/navigation_service.dart';
+import 'package:weighty/services/_services.dart';
 import 'package:weighty/ui/views/splash_view/splash_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  setUpLocator();
 
   runApp(const MyApp());
 }

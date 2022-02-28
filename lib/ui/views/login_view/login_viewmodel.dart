@@ -1,12 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stacked/stacked.dart';
-import 'package:weighty/core/routes.dart';
-import 'package:weighty/services/authentication_service.dart';
-import 'package:weighty/services/navigation_service.dart';
+import 'package:weighty/core/_core.dart';
+import 'package:weighty/services/_services.dart';
 
 class LoginViewmodel extends BaseViewModel {
-  final _authService = AuthenticationService();
-  final _navService = NavigationService();
+  final _authService = locator<IAuthenticationService>();
+  final _navService = locator<INavigationService>();
 
   Future<void> onSignInPress() async {
     try {
@@ -15,7 +14,6 @@ class LoginViewmodel extends BaseViewModel {
       setBusy(false);
       _navService.offNamed(Routes.homeRoute);
     } on FirebaseAuthException catch (e) {
-      // print("ERR $e");
       setBusy(false);
     }
   }

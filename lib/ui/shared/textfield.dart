@@ -29,6 +29,7 @@ class AppTextField extends StatelessWidget {
       initialValue: initialValue,
       validator: validator,
       cursorColor: AppColors.main,
+      keyboardType: TextInputType.number,
       onEditingComplete: () => FocusScope.of(context).nextFocus(),
       style: const TextStyle(
         color: AppColors.main,
@@ -42,7 +43,7 @@ class AppTextField extends StatelessWidget {
         suffixIcon: suffix,
         prefixIcon: prefix,
         filled: true,
-        fillColor:  AppColors.white,
+        fillColor: AppColors.white,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 25, horizontal: 12),
         border: OutlineInputBorder(

@@ -24,7 +24,7 @@ const kBodyStyle = TextStyle(
 );
 
 const kSubBodyStyle = TextStyle(
-  fontSize: 18,
+  fontSize: 15,
   color: AppColors.textColor,
   fontStyle: FontStyle.normal,
   fontWeight: FontWeight.w300,
