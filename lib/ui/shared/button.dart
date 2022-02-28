@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:weighty/ui/constants/_constants.dart';
 
@@ -97,7 +96,7 @@ class _AppButtonState extends State<AppButton> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: widget.labelColor,
-                        fontSize: 18,
+                        fontSize: 20,
                         fontWeight: widget.fontWeight,
                       ),
                     ),

@@ -10,7 +10,7 @@ const kHeaderStyle = TextStyle(
 );
 
 const kMainStyle = TextStyle(
-  fontSize: 35,
+  fontSize: 30,
   color: AppColors.textColor,
   fontStyle: FontStyle.normal,
   fontWeight: FontWeight.w600,
@@ -24,7 +24,7 @@ const kBodyStyle = TextStyle(
 );
 
 const kSubBodyStyle = TextStyle(
-  fontSize: 20,
+  fontSize: 18,
   color: AppColors.textColor,
   fontStyle: FontStyle.normal,
   fontWeight: FontWeight.w300,

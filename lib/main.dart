@@ -1,7 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:weighty/ui/views/login_view/login_view.dart';
+import 'package:weighty/core/routes.dart';
+import 'package:weighty/services/navigation_service.dart';
+import 'package:weighty/ui/views/splash_view/splash_view.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -12,10 +18,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Weighty',
+      navigatorKey: NavigationService.navigatorKey,
+      onGenerateRoute: Routes.generateRoute,
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: const LoginView(),
+      home: const SplashView(),
     );
   }
 }
